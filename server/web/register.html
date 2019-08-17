@@ -1,0 +1,68 @@
+
+<!doctype html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>SHEEP</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center" style="margin-top:100px;margin-bottom:20px">
+            <a href="./index.html" style="color:#CCC"><h4>登录</h4></a>
+            <div style="width:24px"></div>
+            <h4>注册</h4>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xs-10 col-sm-8 col-md-6 col-lg-4 col-xl-3">
+                <div class="form-group">
+                    <label >用户名 </label>
+                    <input id='name' class="form-control">
+                </div>
+                <div class="form-group">
+                    <label >密码</label>
+                    <input id='pw'  type="password" class="form-control">   
+                </div>
+                <div class="form-group">
+                    <label >确认密码</label>
+                    <input id='pw_sure'  type="password" class="form-control">
+                  
+                </div>
+                <br>
+                <button id='regBtn' onClick="sendLoginPost()" class="btn btn-primary btn-block">登录</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+<script type="text/javascript">
+    function sendLoginPost() {
+        var data = {
+            Name: $('#name').val(),
+            Pw: $('#pw').val(),
+            Pw_sure: $('#pw_sure').val(),
+        }
+        $.post('/register', JSON.stringify(data), function (res) {
+            var code=res.Code;
+            var user=res.Data;
+            if(code=="0")window.location.href="./index.html";
+            else alert("ERROR");
+        }, 'json')
+    }
+</script>
+
+</html>
